@@ -1,11 +1,12 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
+# Users
+POST    /user  controllers.Application.newUser
 
-# Home page
-GET     /                           controllers.Application.index
+GET     /users/:userId controllers.Application.getUser(userId: Long)
+
+# Stocks
+POST    /users/:userId/stocks/:symbol controllers.Application.addStock(userId: Long, symbol: String)
+
+GET     /users/:userId/stocks controllers.Application.getStocks(userId: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-    
