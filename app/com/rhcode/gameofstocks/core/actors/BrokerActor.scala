@@ -1,6 +1,9 @@
 package com.rhcode.gameofstocks.core.actors
 
 import akka.actor.Actor
+import com.google.inject.Inject
+import com.rhcode.gameofstocks.core.MarketDataAPI
+import com.rhcode.gameofstocks.core.actors.BrokerActor.GetQuote
 import com.rhcode.gameofstocks.core.models.Stock
 import play.api.Logger
 
@@ -8,14 +11,16 @@ import play.api.Logger
   * Contains all the code associated with interacting with the Quandl API
   * Created by rhonwade on 3/21/16.
   */
-class BrokerActor extends Actor {
-    val stockStore: Map[String, Stock] = Map()
+object BrokerActor {
+    case class GetQuote(symbol: String)
+}
 
+class BrokerActor @Inject() (marketAPI : MarketDataAPI) extends Actor {
+    val stockStore: Map[String, Stock] = Map()
     //def calculateCurrentValue
 
     def receive = {
-        case GetQuote => println("getQuote()")
+        case GetQuote(symbol) => println(marketAPI.getQuote(symbol))
         case _ => Logger.debug("unknownMessage")
     }
-
 }

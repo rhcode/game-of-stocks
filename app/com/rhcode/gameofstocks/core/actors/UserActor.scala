@@ -6,6 +6,11 @@ import play.api.Logger
 /**
   * Created by rhonwade on 3/21/16.
   */
+object UserActor {
+    case class GetUser(userId: Long)
+    case class NewUser(userId: Long)
+}
+
 class UserActor extends Actor {
     def receive = {
         case GetUser => Logger.debug("getUser()")
