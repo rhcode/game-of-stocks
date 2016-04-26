@@ -1,8 +1,17 @@
 package controllers
 
+import akka.actor.{Props, ActorSystem}
+import com.google.inject.{Inject, Singleton}
+import com.rhcode.gameofstocks.core.MarketDataApi
+import com.rhcode.gameofstocks.core.actors.BrokerActor
+import com.rhcode.gameofstocks.core.actors.BrokerActor.GetQuote
 import play.api.mvc._
 
-object Application extends Controller {
+@Singleton
+class Application @Inject()(system: ActorSystem, marketApi : MarketDataApi) extends Controller {
+    val brokerActor = system.actorOf(Props(new BrokerActor(marketApi)), "BrokerActor")
+    brokerActor ! GetQuote("AAPL")
+
     // Return created userid
     def newUser = Action {
         Ok("1234")

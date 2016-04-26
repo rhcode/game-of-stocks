@@ -2,7 +2,7 @@ package com.rhcode.gameofstocks.core.actors
 
 import akka.actor.Actor
 import com.google.inject.Inject
-import com.rhcode.gameofstocks.core.MarketDataAPI
+import com.rhcode.gameofstocks.core.MarketDataApi
 import com.rhcode.gameofstocks.core.actors.BrokerActor.GetQuote
 import com.rhcode.gameofstocks.core.models.Stock
 import play.api.Logger
@@ -15,12 +15,16 @@ object BrokerActor {
     case class GetQuote(symbol: String)
 }
 
-class BrokerActor @Inject() (marketAPI : MarketDataAPI) extends Actor {
+class BrokerActor (marketAPI : MarketDataApi) extends Actor {
     val stockStore: Map[String, Stock] = Map()
     //def calculateCurrentValue
 
     def receive = {
-        case GetQuote(symbol) => println(marketAPI.getQuote(symbol))
+        case GetQuote(symbol) => {
+            Logger.info("Quantopian")
+            println(marketAPI.getQuote(symbol))
+            Logger.info(marketAPI.getQuote(symbol))
+        }
         case _ => Logger.debug("unknownMessage")
     }
 }
