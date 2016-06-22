@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" % "scala-logging-slf4j_2.11" % "2.1.2",
   "com.typesafe.akka" % "akka-remote_2.11" % "2.4.3",
   "com.typesafe.akka" % "akka-actor_2.11" % "2.4.3",
-  "org.mongodb.scala" % "mongo-scala-driver_2.11" % "1.1.0"
+  "org.mongodb.scala" % "mongo-scala-driver_2.11" % "1.1.0",
+  "org.reactivemongo" % "play2-reactivemongo_2.11" % "0.11.13"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )

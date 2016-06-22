@@ -1,5 +1,5 @@
 # Users
-POST    /user  controllers.Application.newUser
+POST    /users  controllers.Application.newUser
 
 GET     /users/:userId controllers.Application.getUser(userId: Long)
 
